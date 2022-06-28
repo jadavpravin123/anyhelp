@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "http://api.anyhelp.in.net",
+    "secure": false,
+    "logLevel": "info",
+    "changeOrigin": true
+  }
+}
