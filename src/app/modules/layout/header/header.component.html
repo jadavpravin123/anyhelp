@@ -1,0 +1,40 @@
+<nav id="mainNavbar"
+      class="site-header sticky-top py-1 navbar navbar-expand-lg  navbar-dark bg-dark justify-content-between">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            (click)="toggleCollapsed()">
+            <span class="navbar-toggler-icon"></span>
+      </button>
+      <div [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}"
+            class="flex-column justify-content-between"
+            id="navbarSupportedContent">
+            <a class="py-2"[routerLink]="['/Home']">
+                  <img src="assets/images/LogoAnyhelp.png" height="55" alt="" loading="lazy" />
+            </a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                   <li class="nav-item active" *ngIf="token != ''">
+                        <a class="nav-link"  [routerLink]="['/dashboard']">Dashboard </a>
+                  </li> 
+                  <li class="nav-item active" *ngIf="token != ''">
+                        <a class="nav-link"  [routerLink]="['/inquery']">Inquery</a>
+                  </li>
+                  <li class="nav-item" *ngIf="token != ''">
+                        <a class="nav-link" [routerLink]="['/business']">Business</a>
+                  </li>
+                  <li class="nav-item" *ngIf="token != ''">
+                        <a class="nav-link" [routerLink]="['/paymentform']">Payment</a>
+                  </li>
+                  <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Profile
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                      </li> -->
+            </ul>
+
+      </div>
+</nav>

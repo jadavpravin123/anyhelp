@@ -1,0 +1,77 @@
+<div class="clearfix"></div>
+<div class="container">
+      <form [formGroup]="LoginForm" class="form-signin text-center" novalidate><br>
+            <!-- <img class="mb-4" src="assets/images/LogoAnyhelp.png" alt="" width="72" height="72"> -->
+            <div *ngIf="firststep">
+                  <!-- <span class="" ><i class="bi bi-phone" width="72" height="72">12</i></span> -->
+                  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                  <p>An OTP will be sent to your mobile number for verification</p>
+                  <div class="form-group row">
+                        <label for="input" class="col-sm-2 col-form-label">Mobile</label>
+                        <div class="col-sm-5">
+                              <input type="text" autocomplete="off" autofocus formControlName="mobileno" maxlength="10" class="form-control"
+                                    id="mobileno" placeholder="Mobile"
+                                    [ngClass]="{ 'is-invalid': submitted && f.mobileno.errors }"
+                                    (keypress)="keyPress($event)">
+                              <div *ngIf="submitted && f.mobileno.errors" class="invalid-feedback">
+                                    <div *ngIf="f.mobileno.errors.required">Please Enter Mobile Number</div>
+                                    <div
+                                          *ngIf="f.mobileno.errors.pattern || f.mobileno.errors.maxlength || f.mobileno.errors.minlength">
+                                          Phone number must be at least 10 numbers</div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <br>
+            <div class="form-group row" *ngIf="firststep">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">
+                        <h4>{{firstNumber}} {{plusOrMinus}} {{secondNumber}} =</h4>
+                  </label>
+                  <div class="col-sm-5">
+                        <input type="text" formControlName="recaptcha" autocomplete="off" maxlength="2" class="form-control" id="input"
+                              placeholder="Enter Captch Code"
+                              [ngClass]="{ 'is-invalid': submitted && f.recaptcha.errors }"
+                              (keypress)="keyPress($event)">
+
+                        <div *ngIf="submitted && f.recaptcha.errors" class="invalid-feedback">
+                              <div *ngIf="f.recaptcha.errors.required">Please Enter Captch Code</div>
+                        </div>
+                  </div>
+                  <div class="col-sm-2">
+                        <button (click)="captchrefresh()" class="btn btn-primary">Refresh</button>
+                  </div>
+            </div>
+            <br>
+
+            <div *ngIf="secondstep">
+                  <h1 class="h3 mb-3 font-weight-normal">Enter Verification Code</h1>
+                  <span>We have sent you a 4 digit OTP on {{mobilenumber}}</span>
+
+                  <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Enter OTP</label>
+                        <div class="col-sm-5">
+                              <input type="text" autocomplete="off" autofocus maxlength="4" (keypress)="keyPress($event)" formControlName="otpcode"
+                                    class="form-control" id="input" placeholder="Enter OTP">
+                        </div>
+                        <div class="col-sm-5">
+                              <label *ngIf="timeLeft != 0">{{timeLeft}} Seconds Left....</label>
+                              <button class="btn btn-primary" (click)="ResendCode()" *ngIf="isResendcode">Resend
+                                    Code</button>
+                        </div>
+                        <h4>There might be some delay in receiving the OTP due to heavy traffic !</h4>
+                  </div>
+            </div>
+            <br />
+
+            <div class="form-group row">
+                  <div class="col-sm-5" *ngIf="firststep">
+                        <button type="submit" (click)="submitmobile()" class="btn btn-primary">Get OTP</button>
+                  </div>
+                  <div class="col-sm-5" *ngIf="secondstep">
+                        <button type="submit" (click)="submitotpverify()" class="btn btn-primary">Verify &
+                              Process</button>
+                  </div>
+            </div>
+      </form>
+
+</div>

@@ -1,0 +1,91 @@
+<div class="clearfix"></div>
+<div class="container">
+    <form [formGroup]="BuyerInqueryForm" class="form-signin text-center"  novalidate><br>
+        <h3>Buyer Inquery</h3>
+        <input type="hidden" id="id_Token">
+        <input type="hidden" formControlName="latitude" name="latitude" id="latitude">
+        <input type="hidden" formControlName="longitude" name="longitude" id="longitude">
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="full name">Full Name</label>
+            <div class="col-sm-10">
+                <input type="text" formControlName="fullname" id="fullname" autofocus placeholder="Enter Full Name"
+                    class="form-control">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="Category name">Category</label>
+            <input type="hidden" id="categoryId">
+            <div class="col-sm-10">
+                <p-autoComplete formControlName="categoryId" [suggestions]="filteredlistcategory"
+                    (completeMethod)="filterGroupedCategory($event)" field="label">
+                    <ng-template let-group pTemplate="group">
+                        <div class="p-d-flex p-ai-center">
+                            <span>{{group.label}}</span>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <!-- <input type="text" id="CategoryList" placeholder="Select category" class="form-control"> -->
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="Location">Location</label>
+            <div class="form-check">
+                <input type="radio" name="locationcheckbox" id="defaultlocation" value="default" checked=""
+                    class="form-check-input" (change)="changeLocation($event)">
+                <label for="defaultlocation" class="form-check-label"> Default Location </label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="locationcheckbox" id="cutomelocation" value="custome"
+                    class="form-check-input" (change)="changeLocation($event)">
+                <label for="customelocation" class="form-check-label"> Custome Location </label>
+                <div *ngIf="isCustomLocation" class="col-sm-10">
+                    <p-autoComplete [suggestions]="filteredlocation" (onSelect)="selectedLocation($event)"
+                        (completeMethod)="filterGroupedLocation($event)" field="label">
+                        <ng-template let-group pTemplate="group">
+                            <div class="p-d-flex p-ai-center">
+                                <span>{{group.label}}</span>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="Location">Inquery Type</label>
+            <div class="form-check " >
+                <input type="radio" name="inquerycheckbox" id="normalRespomse" value="normalRespomse" checked=""
+                    class="form-check-input">
+                <label for="defaultlocation" class="form-check-label"> Normal Response </label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="inquerycheckbox" id="immediatelyRespomse" value="immediatelyRespomse"
+                    class="form-check-input">
+                <label for="customelocation" class="form-check-label"> Immediately Response </label>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" aria-label="Cancel" class="btn btn-outline-dark">Cancel</button>
+            <button id="btnaddupdate" (click)="submit()" type="submit" class="btn btn-outline-dark">Save</button>
+        </div>
+    </form>
+
+
+
+
+    <form action="http://localhost:4200/paymentform" method="GET">
+        <div>
+          <label for="say">What greeting do you want to say?</label>
+          <input name="say" id="say" value="Hi">
+        </div>
+        <div>
+          <label for="to">Who do you want to say it to?</label>
+          <input name="to" id="to" value="Mom">
+        </div>
+        <div>
+          <button>Send my greetings</button>
+        </div>
+      </form>
+</div>
